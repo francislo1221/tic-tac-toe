@@ -13,16 +13,13 @@ var player = "player1"
 
 var piece = "X"
 
-// var board = `\n  ${spaces[0]}  | ${spaces[1]} |  ${spaces[2]}  \n _____________ \n  ${spaces[3]}  | ${spaces[4]} |  ${spaces[5]}  \n _____________ \n  ${spaces[6]}  | ${spaces[7]} |  ${spaces[8]} \n `
-
 var board = ''
 
 
 var handleUserInput = function(space) {
   spaces[space] = piece
   console.clear()
-  // console.log(spaces)
-  // console.log(space, spaces[space], piece)
+  checkWin()
   togglePlayer()
   game()
 }
@@ -52,5 +49,37 @@ var render = function() {
   board = `\n  ${spaces[0]}  | ${spaces[1]} |  ${spaces[2]}  \n _____________ \n  ${spaces[3]}  | ${spaces[4]} |  ${spaces[5]}  \n _____________ \n  ${spaces[6]}  | ${spaces[7]} |  ${spaces[8]} \n `
   console.log(board)
 }
+
+var checkWin = function() {
+  if (checkHorizontal()  === true  || checkVertical()  === true  || checkDiagonal() === true  ) {
+    board = ''
+    console.log(`${player} wins!`)
+    return
+  }
+}
+
+var checkHorizontal= function(){
+  if ((spaces[0] === spaces[1] && spaces[1] === spaces[2]) || (spaces[3] === spaces[4] && spaces[4] === spaces[5]) || (spaces[6] === spaces[7] && spaces[7] === spaces[8])) {
+    return true
+  }
+
+  return false 
+} 
+
+var checkDiagonal= function(){
+  if ((spaces[0] === spaces[4] && spaces[4] === spaces[8]) || (spaces[2] === spaces[4] && spaces[4] === spaces[6])) {
+    return true
+  }
+
+  return false 
+}
+
+var checkVertical= function(){
+  if ((spaces[0] === spaces[1] && spaces[1] === spaces[2]) || (spaces[3] === spaces[4] && spaces[4] === spaces[5]) || (spaces[6] === spaces[7] && spaces[7] === spaces[8])) {
+    return true
+  }
+
+  return false 
+} 
 
 game()
